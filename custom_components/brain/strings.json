@@ -1,0 +1,54 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "Septic Brain / Water Aware device",
+        "description": "Address of the monitor on your network, e.g. septic-7be0.local or 192.168.1.77.",
+        "data": { "host": "Host" }
+      },
+      "zeroconf_confirm": {
+        "title": "Add {name}?",
+        "description": "Home Assistant found {name} on your network."
+      },
+      "token": {
+        "title": "Control token",
+        "description": "This monitor is paired, so its controls need the control token shown when it was paired. To pair again: open the monitor's page, power-cycle it, and choose Pair with Home Assistant within 10 minutes.",
+        "data": { "token": "Control token" }
+      },
+      "reauth_confirm": {
+        "title": "New control token",
+        "description": "The monitor rejected the saved control token (it was paired again). Enter the new one.",
+        "data": { "token": "Control token" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the monitor.",
+      "invalid_token": "The monitor rejected that token.",
+      "unsupported_firmware": "This monitor's firmware uses a status format this integration does not read.",
+      "unsupported_product": "This integration does not know this product."
+    },
+    "abort": {
+      "already_configured": "This monitor is already set up.",
+      "reauth_successful": "Token updated.",
+      "cannot_connect": "Could not reach the monitor.",
+      "not_brain_device": "Not a Septic Brain or Water Aware device.",
+      "unsupported_firmware": "This monitor's firmware uses a status format this integration does not read.",
+      "unsupported_product": "This integration does not know this product."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "description": "Pump relay control lets Home Assistant switch the septic pump relay. The monitor still turns the relay off by itself after its maximum on-time.",
+        "data": {
+          "relay_control": "Allow pump relay control",
+          "water_unit": "Meter register unit",
+          "water_multiplier": "Register multiplier (e.g. 0.1 for a register in tenths)"
+        }
+      }
+    },
+    "abort": { "no_options": "This device has no options." }
+  }
+}
