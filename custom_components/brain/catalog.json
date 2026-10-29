@@ -1,0 +1,1033 @@
+{
+  "format": 1,
+  "generated_by": "npm run export:ha-catalog -w @aware/status-model",
+  "products": {
+    "septic": {
+      "model": "Septic Brain",
+      "measurements": {
+        "aer_dev": {
+          "label": "Aerator power vs baseline",
+          "unit": "%",
+          "scale": 0.1,
+          "offset": 0,
+          "decimals": 1,
+          "ha": {
+            "platform": "sensor",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": true
+          }
+        },
+        "aer_on": {
+          "label": "Aerator",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "onoff": [
+            "on",
+            "OFF"
+          ],
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "running"
+          }
+        },
+        "aer_unusual": {
+          "label": "Aerator behaviour",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "onoff": [
+            "UNUSUAL",
+            "normal"
+          ],
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "problem"
+          }
+        },
+        "alarm": {
+          "label": "Alarm circuit",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "power"
+          }
+        },
+        "alarm_breaker": {
+          "label": "Alarm breaker",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "power"
+          }
+        },
+        "chip_temp": {
+          "label": "Chip temperature",
+          "unit": "°C",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "temperature",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "enclosure_open": {
+          "label": "Enclosure",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "onoff": [
+            "open",
+            "closed"
+          ],
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "opening"
+          }
+        },
+        "flow": {
+          "label": "Flow meter 1 pulses",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "sensor",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "flow2": {
+          "label": "Flow meter 2 pulses",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "sensor",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "freq": {
+          "label": "Line frequency",
+          "unit": "Hz",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "stale_after_ms": 180000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "frequency",
+            "state_class": "measurement"
+          }
+        },
+        "hydro": {
+          "label": "Water depth",
+          "unit": "m",
+          "scale": 0.00026041666666666666,
+          "offset": -1.25,
+          "decimals": 3,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "distance",
+            "state_class": "measurement"
+          }
+        },
+        "hydro_loop_open": {
+          "label": "Level sensor loop",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "onoff": [
+            "OPEN",
+            "ok"
+          ],
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "problem",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "hydro_supply": {
+          "label": "Level loop protector",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "onoff": [
+            "ok",
+            "FAULT"
+          ],
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "problem",
+            "invert": true
+          }
+        },
+        "ipeak": {
+          "label": "Panel (CT1) peak current",
+          "unit": "A",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "current_with": "irms",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "current",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "ipeak2": {
+          "label": "Pump (CT2) peak current",
+          "unit": "A",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "current_with": "irms2",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "current",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "ipeak3": {
+          "label": "Aerator (CT3) peak current",
+          "unit": "A",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "current_with": "irms3",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "current",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "irms": {
+          "label": "Panel (CT1) current",
+          "unit": "A",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "stale_after_ms": 180000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "current",
+            "state_class": "measurement"
+          }
+        },
+        "irms2": {
+          "label": "Pump (CT2) current",
+          "unit": "A",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "stale_after_ms": 180000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "current",
+            "state_class": "measurement"
+          }
+        },
+        "irms3": {
+          "label": "Aerator (CT3) current",
+          "unit": "A",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "stale_after_ms": 180000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "current",
+            "state_class": "measurement"
+          }
+        },
+        "irms_aer": {
+          "label": "Aerator (derived) current",
+          "unit": "A",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "stale_after_ms": 180000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "current",
+            "state_class": "measurement",
+            "enabled": false
+          }
+        },
+        "irms_pump": {
+          "label": "Pump (estimated) current",
+          "unit": "A",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "stale_after_ms": 180000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "current",
+            "state_class": "measurement",
+            "enabled": false
+          }
+        },
+        "light": {
+          "label": "Light (ADS1115 code)",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "sensor",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "pf": {
+          "label": "Panel (CT1) power factor",
+          "unit": "",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 3,
+          "current_with": "irms",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "power_factor",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "pf2": {
+          "label": "Pump (CT2) power factor",
+          "unit": "",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 3,
+          "current_with": "irms2",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "power_factor",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "pf3": {
+          "label": "Aerator (CT3) power factor",
+          "unit": "",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 3,
+          "current_with": "irms3",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "power_factor",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "phy_mode": {
+          "label": "Wi‑Fi link",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "0": "Long range (0.25–0.5 Mb/s)",
+            "1": "802.11b (1–11 Mb/s)",
+            "2": "802.11g (6–54 Mb/s)",
+            "3": "802.11a (6–54 Mb/s)",
+            "4": "802.11n HT20 (7–72 Mb/s)",
+            "5": "802.11n HT40 (14–150 Mb/s)",
+            "6": "802.11ax HE20 (7–115 Mb/s)",
+            "7": "802.11ac VHT20 (7–87 Mb/s)"
+          },
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "power": {
+          "label": "Panel (CT1) real power",
+          "unit": "W",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "current_with": "irms",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "power",
+            "state_class": "measurement",
+            "energy": true
+          }
+        },
+        "power2": {
+          "label": "Pump (CT2) real power",
+          "unit": "W",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "current_with": "irms2",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "power",
+            "state_class": "measurement",
+            "energy": true
+          }
+        },
+        "power3": {
+          "label": "Aerator (CT3) real power",
+          "unit": "W",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "current_with": "irms3",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "power",
+            "state_class": "measurement",
+            "energy": true
+          }
+        },
+        "power_aer": {
+          "label": "Aerator (derived) real power",
+          "unit": "W",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "current_with": "irms_aer",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "power",
+            "state_class": "measurement",
+            "enabled": false,
+            "energy": true
+          }
+        },
+        "power_pump": {
+          "label": "Pump (estimated) real power",
+          "unit": "W",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "current_with": "irms_pump",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "power",
+            "state_class": "measurement",
+            "enabled": false,
+            "energy": true
+          }
+        },
+        "press": {
+          "label": "Pressure",
+          "unit": "psi",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 3,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "pressure",
+            "state_class": "measurement"
+          }
+        },
+        "press_ripple": {
+          "label": "Pressure ripple (RMS)",
+          "unit": "mpsi",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 3,
+          "ha": {
+            "platform": "sensor",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "press_zero": {
+          "label": "Pressure zero-frame reads",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "sensor",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "pump_breaker": {
+          "label": "Pump breaker",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "power"
+          }
+        },
+        "pump_on": {
+          "label": "Pump output",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "running"
+          }
+        },
+        "pump_on_est": {
+          "label": "Pump output (estimated)",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "running",
+            "enabled": false
+          }
+        },
+        "reactive": {
+          "label": "Panel (CT1) reactive power",
+          "unit": "VAR",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "current_with": "irms",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "reactive_power",
+            "state_class": "measurement",
+            "unit": "var",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "reactive2": {
+          "label": "Pump (CT2) reactive power",
+          "unit": "VAR",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "current_with": "irms2",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "reactive_power",
+            "state_class": "measurement",
+            "unit": "var",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "reactive3": {
+          "label": "Aerator (CT3) reactive power",
+          "unit": "VAR",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "current_with": "irms3",
+          "ha": {
+            "platform": "sensor",
+            "device_class": "reactive_power",
+            "state_class": "measurement",
+            "unit": "var",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "reset_reason": {
+          "label": "Last reset",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "1": "Power on",
+            "3": "Software reset",
+            "5": "Deep sleep",
+            "6": "SDIO",
+            "7": "Watchdog (MWDT0)",
+            "8": "Watchdog (MWDT1)",
+            "9": "Watchdog (RTC, core)",
+            "11": "Watchdog (MWDT0, CPU)",
+            "12": "Software reset (CPU)",
+            "13": "Watchdog (RTC, CPU)",
+            "15": "Brownout",
+            "16": "Watchdog (RTC)",
+            "17": "Watchdog (MWDT1, CPU)",
+            "18": "Super watchdog",
+            "20": "eFuse CRC",
+            "21": "USB serial reset",
+            "22": "USB JTAG reset",
+            "24": "JTAG"
+          },
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "rssi": {
+          "label": "Wi‑Fi signal",
+          "unit": "dBm",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "signal_strength",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "temp": {
+          "label": "Probe temperature",
+          "unit": "°C",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "temperature",
+            "state_class": "measurement"
+          }
+        },
+        "timer_off": {
+          "label": "Timer-off circuit",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "binary_sensor",
+            "device_class": "power"
+          }
+        },
+        "vrms": {
+          "label": "Line voltage",
+          "unit": "V",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 1,
+          "stale_after_ms": 180000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "voltage",
+            "state_class": "measurement"
+          }
+        }
+      }
+    },
+    "water": {
+      "model": "Water Aware",
+      "measurements": {
+        "backflow": {
+          "label": "Backflow (35 d)",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "0": "none",
+            "1": "low",
+            "2": "high",
+            "3": "high"
+          },
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum"
+          }
+        },
+        "battery_mv": {
+          "label": "Battery",
+          "unit": "V",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "voltage",
+            "state_class": "measurement",
+            "entity_category": "diagnostic"
+          }
+        },
+        "consumption": {
+          "label": "Meter register",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "water",
+            "state_class": "total_increasing"
+          }
+        },
+        "leak": {
+          "label": "Leak days (bins)",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor"
+          }
+        },
+        "leaknow": {
+          "label": "Leak now",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "0": "none",
+            "1": "low",
+            "2": "high",
+            "3": "high"
+          },
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum"
+          }
+        },
+        "meter_rssi": {
+          "label": "Meter signal",
+          "unit": "dBm",
+          "scale": 0.1,
+          "offset": 0,
+          "decimals": 1,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "signal_strength",
+            "state_class": "measurement",
+            "entity_category": "diagnostic"
+          }
+        },
+        "noise_floor": {
+          "label": "Receiver noise floor",
+          "unit": "dBm",
+          "scale": 0.1,
+          "offset": 0,
+          "decimals": 1,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "signal_strength",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "nouse": {
+          "label": "No-use days (bins)",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor"
+          }
+        },
+        "phy_mode": {
+          "label": "Wi‑Fi link",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "0": "Long range (0.25–0.5 Mb/s)",
+            "1": "802.11b (1–11 Mb/s)",
+            "2": "802.11g (6–54 Mb/s)",
+            "3": "802.11a (6–54 Mb/s)",
+            "4": "802.11n HT20 (7–72 Mb/s)",
+            "5": "802.11n HT40 (14–150 Mb/s)",
+            "6": "802.11ax HE20 (7–115 Mb/s)",
+            "7": "802.11ac VHT20 (7–87 Mb/s)"
+          },
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "reset_reason": {
+          "label": "Last reset",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "1": "Power on",
+            "3": "Software reset",
+            "5": "Deep sleep",
+            "6": "SDIO",
+            "7": "Watchdog (MWDT0)",
+            "8": "Watchdog (MWDT1)",
+            "9": "Watchdog (RTC, core)",
+            "11": "Watchdog (MWDT0, CPU)",
+            "12": "Software reset (CPU)",
+            "13": "Watchdog (RTC, CPU)",
+            "15": "Brownout",
+            "16": "Watchdog (RTC)",
+            "17": "Watchdog (MWDT1, CPU)",
+            "18": "Super watchdog",
+            "20": "eFuse CRC",
+            "21": "USB serial reset",
+            "22": "USB JTAG reset",
+            "24": "JTAG"
+          },
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "rssi": {
+          "label": "Wi‑Fi signal",
+          "unit": "dBm",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "signal_strength",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        }
+      }
+    },
+    "water-w12": {
+      "model": "Water Aware (W12)",
+      "measurements": {
+        "backflow": {
+          "label": "Backflow (35 d)",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "0": "none",
+            "1": "low",
+            "2": "high",
+            "3": "high"
+          },
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum"
+          }
+        },
+        "battery_mv": {
+          "label": "Battery",
+          "unit": "V",
+          "scale": 0.001,
+          "offset": 0,
+          "decimals": 2,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "voltage",
+            "state_class": "measurement",
+            "entity_category": "diagnostic"
+          }
+        },
+        "consumption": {
+          "label": "Meter register",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "water",
+            "state_class": "total_increasing"
+          }
+        },
+        "leak": {
+          "label": "Leak days (bins)",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor"
+          }
+        },
+        "leaknow": {
+          "label": "Leak now",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "0": "none",
+            "1": "low",
+            "2": "high",
+            "3": "high"
+          },
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum"
+          }
+        },
+        "meter_rssi": {
+          "label": "Meter signal",
+          "unit": "dBm",
+          "scale": 0.1,
+          "offset": 0,
+          "decimals": 1,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "signal_strength",
+            "state_class": "measurement",
+            "entity_category": "diagnostic"
+          }
+        },
+        "noise_floor": {
+          "label": "Receiver noise floor",
+          "unit": "dBm",
+          "scale": 0.1,
+          "offset": 0,
+          "decimals": 1,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "signal_strength",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "nouse": {
+          "label": "No-use days (bins)",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "stale_after_ms": 300000,
+          "ha": {
+            "platform": "sensor"
+          }
+        },
+        "phy_mode": {
+          "label": "Wi‑Fi link",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "0": "Long range (0.25–0.5 Mb/s)",
+            "1": "802.11b (1–11 Mb/s)",
+            "2": "802.11g (6–54 Mb/s)",
+            "3": "802.11a (6–54 Mb/s)",
+            "4": "802.11n HT20 (7–72 Mb/s)",
+            "5": "802.11n HT40 (14–150 Mb/s)",
+            "6": "802.11ax HE20 (7–115 Mb/s)",
+            "7": "802.11ac VHT20 (7–87 Mb/s)"
+          },
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "reset_reason": {
+          "label": "Last reset",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "codes": {
+            "1": "Power on",
+            "3": "Software reset",
+            "5": "Deep sleep",
+            "6": "SDIO",
+            "7": "Watchdog (MWDT0)",
+            "8": "Watchdog (MWDT1)",
+            "9": "Watchdog (RTC, core)",
+            "11": "Watchdog (MWDT0, CPU)",
+            "12": "Software reset (CPU)",
+            "13": "Watchdog (RTC, CPU)",
+            "15": "Brownout",
+            "16": "Watchdog (RTC)",
+            "17": "Watchdog (MWDT1, CPU)",
+            "18": "Super watchdog",
+            "20": "eFuse CRC",
+            "21": "USB serial reset",
+            "22": "USB JTAG reset",
+            "24": "JTAG"
+          },
+          "ha": {
+            "platform": "sensor",
+            "device_class": "enum",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "rssi": {
+          "label": "Wi‑Fi signal",
+          "unit": "dBm",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "sensor",
+            "device_class": "signal_strength",
+            "state_class": "measurement",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        }
+      }
+    }
+  }
+}

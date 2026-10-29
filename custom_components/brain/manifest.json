@@ -1,0 +1,17 @@
+{
+  "domain": "brain",
+  "name": "Brain (Septic Brain / Water Aware)",
+  "codeowners": [
+    "@QuinnHarris"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/septicbrain/ha-brain",
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/septicbrain/ha-brain/issues",
+  "requirements": [],
+  "version": "0.1.0",
+  "zeroconf": [
+    "_brain._tcp.local."
+  ]
+}
