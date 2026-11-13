@@ -1,4 +1,4 @@
-"""Brain: Septic Brain and Water Aware devices over their local API (local push)."""
+"""Brain: Septic Brain devices over their local API (local push)."""
 
 from __future__ import annotations
 

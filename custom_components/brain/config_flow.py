@@ -17,17 +17,10 @@ from . import BrainConfigEntry, async_catalog
 from .api import BrainApi, BrainError, CannotConnect
 from .const import (
     CONF_TOKEN,
-    DEFAULT_WATER_MULTIPLIER,
-    DEFAULT_WATER_UNIT,
     DOMAIN,
     OPT_RELAY_CONTROL,
-    OPT_WATER_MULTIPLIER,
-    OPT_WATER_UNIT,
     STATUS_FORMAT_VERSION,
-    WATER_UNITS,
 )
-
-WATER_PRODUCTS = ("water", "water-w12")
 
 
 class BrainConfigFlow(ConfigFlow, domain=DOMAIN):
@@ -150,7 +143,7 @@ class BrainConfigFlow(ConfigFlow, domain=DOMAIN):
 
 
 class BrainOptionsFlow(OptionsFlowWithReload):
-    """Relay control opt-in (septic) and the water register's unit (water)."""
+    """Relay control opt-in (septic)."""
 
     async def async_step_init(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         if user_input is not None:
@@ -161,13 +154,6 @@ class BrainOptionsFlow(OptionsFlowWithReload):
         product = entry.runtime_data.product.slug if hasattr(entry, "runtime_data") else ""
         if product == "septic":
             fields[vol.Required(OPT_RELAY_CONTROL, default=opts.get(OPT_RELAY_CONTROL, False))] = bool
-        if product in WATER_PRODUCTS:
-            fields[vol.Required(OPT_WATER_UNIT, default=opts.get(OPT_WATER_UNIT, DEFAULT_WATER_UNIT))] = vol.In(
-                WATER_UNITS
-            )
-            fields[
-                vol.Required(OPT_WATER_MULTIPLIER, default=opts.get(OPT_WATER_MULTIPLIER, DEFAULT_WATER_MULTIPLIER))
-            ] = vol.All(vol.Coerce(float), vol.Range(min=0.000001))
         if not fields:
             return self.async_abort(reason="no_options")
         return self.async_show_form(step_id="init", data_schema=vol.Schema(fields))

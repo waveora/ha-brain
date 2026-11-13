@@ -16,19 +16,10 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from . import BrainConfigEntry
-from .catalog import Measurement
-from .const import (
-    DEFAULT_WATER_MULTIPLIER,
-    DEFAULT_WATER_UNIT,
-    ENERGY_MAX_GAP_S,
-    OPT_WATER_MULTIPLIER,
-    OPT_WATER_UNIT,
-    SAME_REPORT_S,
-)
+from .catalog import Measurement, hidden_by_setup
+from .const import ENERGY_MAX_GAP_S, SAME_REPORT_S
 from .device import BrainDevice
 from .entity import BrainEntity
-
-WATER_METER = "consumption"
 
 
 async def async_setup_entry(
@@ -37,20 +28,9 @@ async def async_setup_entry(
     data = entry.runtime_data
     entities: list[SensorEntity] = []
     for m in data.product.measurements.values():
-        if m.platform != "sensor":
+        if m.platform != "sensor" or hidden_by_setup(m.name, data.device.sections):
             continue
-        if m.name == WATER_METER:
-            entities.append(
-                WaterMeterSensor(
-                    data.device,
-                    data.product.model,
-                    m,
-                    entry.options.get(OPT_WATER_UNIT, DEFAULT_WATER_UNIT),
-                    entry.options.get(OPT_WATER_MULTIPLIER, DEFAULT_WATER_MULTIPLIER),
-                )
-            )
-        else:
-            entities.append(MeasurementSensor(data.device, data.product.model, m))
+        entities.append(MeasurementSensor(data.device, data.product.model, m))
         if m.ha.get("energy"):
             entities.append(EnergySensor(data.device, data.product.model, m, data.product.measurements))
     if "relay" in data.device.sections and "last_off" in (data.device.sections["relay"] or {}):
@@ -113,21 +93,6 @@ class MeasurementSensor(BrainEntity, SensorEntity):
         if not is_current(self.device, self.m):
             return 0
         return self.m.display(v.raw)
-
-
-class WaterMeterSensor(MeasurementSensor):
-    """The meter register, in the unit and multiplier the user chose."""
-
-    def __init__(self, device: BrainDevice, model: str, m: Measurement, unit: str, multiplier: float) -> None:
-        super().__init__(device, model, m)
-        self._attr_native_unit_of_measurement = unit
-        self._multiplier = multiplier
-        self._attr_suggested_display_precision = max(0, len(f"{multiplier:g}".partition(".")[2]))
-
-    @property
-    def native_value(self) -> Any:
-        v = self.device.value(self.m.name)
-        return None if v is None else round(float(v.raw) * self._multiplier, 6)
 
 
 class EnergySensor(BrainEntity, RestoreSensor):

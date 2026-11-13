@@ -1,16 +1,16 @@
 {
   "domain": "brain",
-  "name": "Brain (Septic Brain / Water Aware)",
+  "name": "Brain (Septic Brain)",
   "codeowners": [
     "@QuinnHarris"
   ],
   "config_flow": true,
-  "documentation": "https://github.com/septicbrain/ha-brain",
+  "documentation": "https://github.com/waveora/ha-brain",
   "integration_type": "device",
   "iot_class": "local_push",
-  "issue_tracker": "https://github.com/septicbrain/ha-brain/issues",
+  "issue_tracker": "https://github.com/waveora/ha-brain/issues",
   "requirements": [],
-  "version": "0.1.0",
+  "version": "0.2.0",
   "zeroconf": [
     "_brain._tcp.local."
   ]

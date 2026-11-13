@@ -1,7 +1,7 @@
-"""The measurement catalog exported from `@aware/status-model` (`catalog.json`).
+"""The measurement catalog exported from `@brain/status-model` (`catalog.json`).
 
 Generated: edit the TypeScript catalog and run
-`npm run export:ha-catalog -w @aware/status-model`, never this file's data.
+`npm run export:ha-catalog -w @brain/status-model`, never this file's data.
 """
 
 from __future__ import annotations
@@ -38,6 +38,22 @@ class Measurement:
         """Raw wire value → display value (catalog scale, offset, decimals)."""
         value = float(raw) * self.scale + self.offset
         return round(value) if self.decimals == 0 else round(value, self.decimals)
+
+
+AERATOR_SERIES = frozenset({"aer_on", "aer_unusual", "aer_dev", "irms_aer", "power_aer", "reactive_aer", "pf_aer"})
+
+
+def hidden_by_setup(name: str, sections: dict[str, Any]) -> bool:
+    """Whether the board's setup rules a measurement out (`setup.pressure`): pressure series when
+    pressure is off, the probe temperature when the sensor is not read, the aerator's series without
+    an aerator. Unknown setup: nothing."""
+    setup = sections.get("setup") or {}
+    pressure = setup.get("pressure") or {}
+    if name.startswith("press") and pressure.get("active") is False:
+        return True
+    if name in AERATOR_SERIES and (setup.get("aerator") or {}).get("fitted") is False:
+        return True
+    return name == "temp" and pressure.get("sensor") is False
 
 
 @dataclass(frozen=True)

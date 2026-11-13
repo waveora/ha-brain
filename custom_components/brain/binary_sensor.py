@@ -8,7 +8,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from . import BrainConfigEntry
-from .catalog import Measurement
+from .catalog import Measurement, hidden_by_setup
 from .device import BrainDevice
 from .entity import BrainEntity
 
@@ -20,7 +20,7 @@ async def async_setup_entry(
     entities: list[BinarySensorEntity] = [
         MeasurementBinarySensor(data.device, data.product.model, m)
         for m in data.product.measurements.values()
-        if m.platform == "binary_sensor"
+        if m.platform == "binary_sensor" and not hidden_by_setup(m.name, data.device.sections)
     ]
     if "relay" in data.device.sections:
         entities.append(RelayStateBinarySensor(data.device, data.product.model))

@@ -1,6 +1,6 @@
 """One device's live status: the stream (or polling) kept applied to a local copy.
 
-Semantics follow `@aware/status-model`'s reducer: a snapshot replaces
+Semantics follow `@brain/status-model`'s reducer: a snapshot replaces
 everything, events at or below the applied `seq` are dropped, `resync` means
 refetch the snapshot. Ages are turned into the monotonic time each value was
 produced, so an entity can ask how old a value is at any moment.

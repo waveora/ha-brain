@@ -1,4 +1,4 @@
-"""Constants for the Brain integration (Septic Brain / Water Aware, local API)."""
+"""Constants for the Brain integration (Septic Brain, local API)."""
 
 from datetime import timedelta
 
@@ -9,11 +9,6 @@ CONF_TOKEN = "token"
 
 # Options.
 OPT_RELAY_CONTROL = "relay_control"
-OPT_WATER_UNIT = "water_unit"
-OPT_WATER_MULTIPLIER = "water_multiplier"
-WATER_UNITS = ["gal", "ft³", "CCF", "m³", "L"]
-DEFAULT_WATER_UNIT = "gal"
-DEFAULT_WATER_MULTIPLIER = 1.0
 
 # Status JSON format major version this integration reads.
 STATUS_FORMAT_VERSION = 1
