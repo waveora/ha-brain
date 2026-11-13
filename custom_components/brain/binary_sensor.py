@@ -8,7 +8,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from . import BrainConfigEntry
-from .catalog import Measurement, hidden_by_setup
+from .catalog import Measurement, creates, enabled_default
 from .device import BrainDevice
 from .entity import BrainEntity
 
@@ -20,7 +20,7 @@ async def async_setup_entry(
     entities: list[BinarySensorEntity] = [
         MeasurementBinarySensor(data.device, data.product.model, m)
         for m in data.product.measurements.values()
-        if m.platform == "binary_sensor" and not hidden_by_setup(m.name, data.device.sections)
+        if m.platform == "binary_sensor" and creates(m.name, data.device.sections)
     ]
     if "relay" in data.device.sections:
         entities.append(RelayStateBinarySensor(data.device, data.product.model))
@@ -32,7 +32,7 @@ class MeasurementBinarySensor(BrainEntity, BinarySensorEntity):
         super().__init__(device, model, m.name)
         self.m = m
         self._attr_name = m.label
-        self._attr_entity_registry_enabled_default = m.ha.get("enabled", True)
+        self._attr_entity_registry_enabled_default = enabled_default(m, device.sections)
         if m.ha.get("entity_category") == "diagnostic":
             self._attr_entity_category = EntityCategory.DIAGNOSTIC
         if device_class := m.ha.get("device_class"):

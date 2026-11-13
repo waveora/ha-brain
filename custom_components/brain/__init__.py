@@ -14,6 +14,7 @@ from .api import BrainApi, BrainError
 from .catalog import Product, load_catalog
 from .const import CONF_TOKEN, DOMAIN, STATUS_FORMAT_VERSION
 from .device import BrainDevice
+from .publishes import async_track_publishes
 
 PLATFORMS = [Platform.BINARY_SENSOR, Platform.NUMBER, Platform.SELECT, Platform.SENSOR, Platform.SWITCH]
 
@@ -52,6 +53,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: BrainConfigEntry) -> boo
     device = BrainDevice(hass, api, snapshot)
     entry.runtime_data = BrainData(device, product)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    # After the platforms, so every entity is in the registry.
+    async_track_publishes(hass, entry)
     entry.async_create_background_task(hass, device.run(), f"{DOMAIN} {device.device_id} status")
     return True
 

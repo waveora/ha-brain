@@ -16,7 +16,7 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from . import BrainConfigEntry
-from .catalog import Measurement, hidden_by_setup
+from .catalog import Measurement, creates, enabled_default
 from .const import ENERGY_MAX_GAP_S, SAME_REPORT_S
 from .device import BrainDevice
 from .entity import BrainEntity
@@ -28,7 +28,7 @@ async def async_setup_entry(
     data = entry.runtime_data
     entities: list[SensorEntity] = []
     for m in data.product.measurements.values():
-        if m.platform != "sensor" or hidden_by_setup(m.name, data.device.sections):
+        if m.platform != "sensor" or not creates(m.name, data.device.sections):
             continue
         entities.append(MeasurementSensor(data.device, data.product.model, m))
         if m.ha.get("energy"):
@@ -56,7 +56,7 @@ class MeasurementSensor(BrainEntity, SensorEntity):
         self.m = m
         ha = m.ha
         self._attr_name = m.label
-        self._attr_entity_registry_enabled_default = ha.get("enabled", True)
+        self._attr_entity_registry_enabled_default = enabled_default(m, device.sections)
         if ha.get("entity_category") == "diagnostic":
             self._attr_entity_category = EntityCategory.DIAGNOSTIC
         self._dc = SensorDeviceClass(ha["device_class"]) if "device_class" in ha else None
@@ -113,7 +113,7 @@ class EnergySensor(BrainEntity, RestoreSensor):
         super().__init__(device, model, f"{power.name}_energy")
         self.power = power
         self._attr_name = power.label.replace("real power", "energy")
-        self._attr_entity_registry_enabled_default = power.ha.get("enabled", True)
+        self._attr_entity_registry_enabled_default = enabled_default(power, device.sections)
         self._watch = {power.name} | ({power.current_with} if power.current_with else set())
         self._kwh = 0.0
         self._last: tuple[float, float] | None = None  # (monotonic s, W)

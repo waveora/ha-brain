@@ -10,6 +10,13 @@ monitor on your network (local push over its event stream); no cloud account is 
 3. Monitors on your network are discovered automatically (Settings → Devices & services). Or add
    **Brain** and enter the monitor's address, e.g. `septic-7be0.local`.
 
+## Entities
+
+Each monitor reports which measurements its setup produces (current sensors fitted and their
+roles, voltage-input roles, pressure, aerator, level-loop supply). Entities for the others are
+added disabled, and follow when the setup changes on the monitor; an entity you disable stays
+disabled. Monitors on older firmware get every entity their setup does not rule out.
+
 ## Pairing (controls)
 
 Readings work without pairing. To let Home Assistant use the monitor's controls (current sensors

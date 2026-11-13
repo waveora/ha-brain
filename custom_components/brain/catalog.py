@@ -43,10 +43,32 @@ class Measurement:
 AERATOR_SERIES = frozenset({"aer_on", "aer_unusual", "aer_dev", "irms_aer", "power_aer", "reactive_aer", "pf_aer"})
 
 
+def published(sections: dict[str, Any]) -> frozenset[str] | None:
+    """`setup.publishes`: the names the board sends under its setup, or `None` when it does
+    not say (older firmware)."""
+    names = (sections.get("setup") or {}).get("publishes")
+    if not isinstance(names, list):
+        return None
+    return frozenset(n for n in names if isinstance(n, str))
+
+
+def creates(name: str, sections: dict[str, Any]) -> bool:
+    """Whether a measurement gets an entity. With `setup.publishes` every catalog entry does
+    (one the board does not publish is registered disabled, see `enabled_default`);
+    without it, what `hidden_by_setup` rules out gets none."""
+    return published(sections) is not None or not hidden_by_setup(name, sections)
+
+
+def enabled_default(m: Measurement, sections: dict[str, Any]) -> bool:
+    """Registered enabled: the catalog's default, and published when the board says."""
+    names = published(sections)
+    return m.ha.get("enabled", True) and (names is None or m.name in names)
+
+
 def hidden_by_setup(name: str, sections: dict[str, Any]) -> bool:
-    """Whether the board's setup rules a measurement out (`setup.pressure`): pressure series when
-    pressure is off, the probe temperature when the sensor is not read, the aerator's series without
-    an aerator. Unknown setup: nothing."""
+    """Whether the board's setup rules a measurement out, for firmware without
+    `setup.publishes`: pressure series when pressure is off, the probe temperature when the
+    sensor is not read, the aerator's series without an aerator. Unknown setup: nothing."""
     setup = sections.get("setup") or {}
     pressure = setup.get("pressure") or {}
     if name.startswith("press") and pressure.get("active") is False:
