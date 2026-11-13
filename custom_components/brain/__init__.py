@@ -12,11 +12,11 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .api import BrainApi, BrainError
 from .catalog import Product, load_catalog
-from .const import CONF_TOKEN, DOMAIN, STATUS_FORMAT_VERSION
+from .const import DOMAIN, STATUS_FORMAT_VERSION
 from .device import BrainDevice
 from .publishes import async_track_publishes
 
-PLATFORMS = [Platform.BINARY_SENSOR, Platform.NUMBER, Platform.SELECT, Platform.SENSOR, Platform.SWITCH]
+PLATFORMS = [Platform.BINARY_SENSOR, Platform.SENSOR]
 
 
 @dataclass
@@ -36,7 +36,7 @@ async def async_catalog(hass: HomeAssistant) -> dict[str, Product]:
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: BrainConfigEntry) -> bool:
-    api = BrainApi(async_get_clientsession(hass), entry.data[CONF_HOST], entry.data.get(CONF_TOKEN))
+    api = BrainApi(async_get_clientsession(hass), entry.data[CONF_HOST])
     try:
         snapshot = await api.status()
     except BrainError as err:

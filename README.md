@@ -17,24 +17,10 @@ roles, voltage-input roles, pressure, aerator, level-loop supply). Entities for 
 added disabled, and follow when the setup changes on the monitor; an entity you disable stays
 disabled. Monitors on older firmware get every entity their setup does not rule out.
 
-## Pairing (controls)
+## Read-only
 
-Readings work without pairing. To let Home Assistant use the monitor's controls (current sensors
-fitted, relay time limit, and — if you opt in — the pump relay), pair the monitor:
-
-1. Open the monitor's page in a browser (its address, or its setup network `SepticBrain`).
-2. Power-cycle the monitor, then within 10 minutes choose **Pair with Home Assistant** on its page.
-   (On its setup network you can pair at any time.)
-3. Copy the control token shown — it is shown once — and enter it when Home Assistant asks.
-
-Once paired, controls from your network need the token, whoever sends them.
-
-## Pump relay
-
-The relay switch is off unless you enable **Allow pump relay control** in the integration's options.
-Whatever turns the relay on, the monitor turns it off by itself after its maximum on-time (30 minutes
-by default, adjustable as the *Relay maximum on-time* entity), and reports *Relay last off:
-interlock*.
+The integration only reads the monitor: it has no pairing step and no controls (no pump relay
+switch, no settings). Change the monitor's setup on its own page.
 
 ## Issues
 

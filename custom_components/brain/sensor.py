@@ -1,4 +1,4 @@
-"""Sensors: catalog measurements, energy from real power, relay `last_off`."""
+"""Sensors: catalog measurements and energy from real power."""
 
 from __future__ import annotations
 
@@ -33,8 +33,6 @@ async def async_setup_entry(
         entities.append(MeasurementSensor(data.device, data.product.model, m))
         if m.ha.get("energy"):
             entities.append(EnergySensor(data.device, data.product.model, m, data.product.measurements))
-    if "relay" in data.device.sections and "last_off" in (data.device.sections["relay"] or {}):
-        entities.append(RelayLastOffSensor(data.device, data.product.model))
     async_add_entities(entities)
 
 
@@ -146,18 +144,3 @@ class EnergySensor(BrainEntity, RestoreSensor):
     def native_value(self) -> float:
         return round(self._kwh, 6)
 
-
-class RelayLastOffSensor(BrainEntity, SensorEntity):
-    """Why the pump relay last went off (`request`, `interlock`, `boot`)."""
-
-    _attr_name = "Relay last off"
-    _attr_device_class = SensorDeviceClass.ENUM
-    _attr_options = ["boot", "request", "interlock"]
-    _attr_entity_category = EntityCategory.DIAGNOSTIC
-
-    def __init__(self, device: BrainDevice, model: str) -> None:
-        super().__init__(device, model, "relay_last_off")
-
-    @property
-    def native_value(self) -> str | None:
-        return (self.device.sections.get("relay") or {}).get("last_off")

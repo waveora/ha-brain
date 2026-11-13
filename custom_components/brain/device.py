@@ -64,10 +64,6 @@ class BrainDevice:
     def version(self) -> str | None:
         return self.identity.get("version")
 
-    @property
-    def paired(self) -> bool:
-        return bool((self.sections.get("network") or {}).get("paired"))
-
     # Listeners --------------------------------------------------------------
 
     @callback

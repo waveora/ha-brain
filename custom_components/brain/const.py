@@ -5,11 +5,6 @@ from datetime import timedelta
 DOMAIN = "brain"
 MANUFACTURER = "Septic Brain"
 
-CONF_TOKEN = "token"
-
-# Options.
-OPT_RELAY_CONTROL = "relay_control"
-
 # Status JSON format major version this integration reads.
 STATUS_FORMAT_VERSION = 1
 
@@ -27,7 +22,3 @@ SAME_REPORT_S = 2.0
 # Energy is not integrated across a gap longer than this (AC reports come at
 # least every 60 s; the catalog marks them stale after 3 min).
 ENERGY_MAX_GAP_S = 180.0
-
-# Action whose name no product handles: authorised → 404, else 401. Used to
-# check a token without changing anything.
-VERIFY_ACTION = "brain-verify"

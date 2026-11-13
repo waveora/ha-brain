@@ -1,4 +1,4 @@
-"""HTTP client for a device's local API (`fw-status-api`, `fw-local-control-auth`)."""
+"""HTTP client for a device's local API (`fw-status-api`): read-only."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from typing import Any
 
 import aiohttp
 
-from .const import REQUEST_TIMEOUT, STREAM_IDLE_TIMEOUT, VERIFY_ACTION
+from .const import REQUEST_TIMEOUT, STREAM_IDLE_TIMEOUT
 
 
 class BrainError(Exception):
@@ -20,10 +20,6 @@ class CannotConnect(BrainError):
     """The device did not answer."""
 
 
-class InvalidAuth(BrainError):
-    """The device rejected the control token."""
-
-
 class StreamRefused(BrainError):
     """All of the device's event-stream slots are taken (HTTP 503)."""
 
@@ -31,17 +27,13 @@ class StreamRefused(BrainError):
 class BrainApi:
     """One device at `host` (address or `name.local`, optional `:port`)."""
 
-    def __init__(self, session: aiohttp.ClientSession, host: str, token: str | None = None) -> None:
+    def __init__(self, session: aiohttp.ClientSession, host: str) -> None:
         self._session = session
         self.host = host
-        self.token = token
 
     @property
     def base(self) -> str:
         return f"http://{self.host}"
-
-    def _auth(self) -> dict[str, str]:
-        return {"Authorization": f"Bearer {self.token}"} if self.token else {}
 
     async def status(self) -> dict[str, Any]:
         """`GET /api/status`."""
@@ -52,36 +44,6 @@ class BrainApi:
                     if resp.status != 200:
                         raise BrainError(f"status: HTTP {resp.status}")
                     return await resp.json(content_type=None)
-        except (aiohttp.ClientError, TimeoutError) as err:
-            raise CannotConnect(str(err)) from err
-
-    async def action(self, name: str) -> None:
-        """`POST /api/action/<name>` with the token when there is one."""
-        status, body = await self._post(f"/api/action/{name}")
-        if status == 401:
-            raise InvalidAuth(body.get("error", "unauthorized"))
-        if status != 200 or body.get("ok") is False:
-            raise BrainError(body.get("error") or f"HTTP {status}")
-
-    async def verify_token(self) -> bool:
-        """Whether the device accepts the token (an unknown action: 404 if authorised)."""
-        status, _ = await self._post(f"/api/action/{VERIFY_ACTION}")
-        if status == 401:
-            return False
-        if status in (200, 404):
-            return True
-        raise BrainError(f"verify: HTTP {status}")
-
-    async def _post(self, path: str) -> tuple[int, dict[str, Any]]:
-        try:
-            async with asyncio.timeout(REQUEST_TIMEOUT):
-                resp = await self._session.post(f"{self.base}{path}", headers=self._auth(), data=b"")
-                async with resp:
-                    try:
-                        body = await resp.json(content_type=None)
-                    except (ValueError, aiohttp.ContentTypeError):
-                        body = {}
-                    return resp.status, body if isinstance(body, dict) else {}
         except (aiohttp.ClientError, TimeoutError) as err:
             raise CannotConnect(str(err)) from err
 

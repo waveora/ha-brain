@@ -1,4 +1,4 @@
-"""Binary sensors: boolean catalog measurements and the applied relay state."""
+"""Binary sensors: boolean catalog measurements."""
 
 from __future__ import annotations
 
@@ -17,14 +17,11 @@ async def async_setup_entry(
     hass: HomeAssistant, entry: BrainConfigEntry, async_add_entities: AddConfigEntryEntitiesCallback
 ) -> None:
     data = entry.runtime_data
-    entities: list[BinarySensorEntity] = [
+    async_add_entities(
         MeasurementBinarySensor(data.device, data.product.model, m)
         for m in data.product.measurements.values()
         if m.platform == "binary_sensor" and creates(m.name, data.device.sections)
-    ]
-    if "relay" in data.device.sections:
-        entities.append(RelayStateBinarySensor(data.device, data.product.model))
-    async_add_entities(entities)
+    )
 
 
 class MeasurementBinarySensor(BrainEntity, BinarySensorEntity):
@@ -51,17 +48,3 @@ class MeasurementBinarySensor(BrainEntity, BinarySensorEntity):
         v = self.device.value(self.m.name)
         return None if v is None else bool(v.raw) != self._invert
 
-
-class RelayStateBinarySensor(BrainEntity, BinarySensorEntity):
-    """The relay as the expander last applied it (read-only)."""
-
-    _attr_name = "Pump relay"
-    _attr_device_class = BinarySensorDeviceClass.POWER
-
-    def __init__(self, device: BrainDevice, model: str) -> None:
-        super().__init__(device, model, "relay_state")
-
-    @property
-    def is_on(self) -> bool | None:
-        relay = self.device.sections.get("relay") or {}
-        return relay.get("on")
