@@ -8,7 +8,7 @@ monitor on your network (local push over its event stream); no cloud account is 
 1. In HACS, add this repository as a custom repository (category: Integration) and install **Brain**.
 2. Restart Home Assistant.
 3. Monitors on your network are discovered automatically (Settings → Devices & services). Or add
-   **Brain** and enter the monitor's address, e.g. `septic-7be0.local`.
+   **Brain** and enter the monitor's address, e.g. `septicbrain-7be0.local`.
 
 ## Entities
 

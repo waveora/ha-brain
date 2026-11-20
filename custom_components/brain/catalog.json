@@ -180,6 +180,32 @@
             "enabled": false
           }
         },
+        "flow2_total": {
+          "label": "Flow meter 2 total pulses",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "sensor",
+            "state_class": "total_increasing",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
+        "flow_total": {
+          "label": "Flow meter 1 total pulses",
+          "unit": "",
+          "scale": 1,
+          "offset": 0,
+          "decimals": 0,
+          "ha": {
+            "platform": "sensor",
+            "state_class": "total_increasing",
+            "entity_category": "diagnostic",
+            "enabled": false
+          }
+        },
         "freq": {
           "label": "Line frequency",
           "unit": "Hz",
